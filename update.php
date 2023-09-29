@@ -1,17 +1,28 @@
 <?php
     include 'connect.php';
+    $id = $_GET['updateid'];
+
+    $sql = "Select * from `crud` where id = $id";
+    $result = mysqli_query($con,$sql);
+
+    $row = mysqli_fetch_assoc($result);
+    $name = $row['name'];
+    $email = $row['email'];
+    $mobile = $row['mobile'];
+    $password = $row['password'];
+
     if(isset($_POST['submit'])){
         $name =$_POST['name'];
         $email=$_POST['email'];
         $mobile=$_POST['mobile'];
         $password=$_POST['password'];
 
-        $sql ="insert into `crud` (name,email,mobile,password) values('$name','$email','$mobile','$password')";
+        $sql ="UPDATE `crud` SET `name`='$name',`email`='$email',`mobile`='$mobile',`password`='$password' WHERE `id` = '$id'";
         $result = mysqli_query($con,$sql);
 
         if($result){
-            // echo "Data inserted successfully";
-            header('location:display.php');
+             echo "Updated uccessfully";
+             header('location:display.php');
         }
         else{
             die(mysqli_error($conn));
@@ -40,7 +51,7 @@
    
   <div class="mb-3">
     <label >Name</label>
-    <input type="text" class="form-control" placeholder="Enter your name" name="name" >
+    <input type="text" class="form-control" placeholder="Enter your name" name="name" value=<?php  echo $name; ?> >
     </div>
 
     <div class="form-group">
@@ -52,18 +63,18 @@
     <div class="form-group">
     <div class="mb-3">
     <label >Mobile</label>
-    <input type="text" class="form-control" placeholder="Enter your Mobile number" name="mobile" >
+    <input type="text" class="form-control" placeholder="Enter your Mobile number" value=<?php echo $mobile; ?> name="mobile" >
     </div>
 
     <div class="form-group">
    
    <div class="mb-3">
      <label >Password</label>
-     <input type="text" class="form-control" placeholder="Enter your Password" name="password" >
+     <input type="text" class="form-control" placeholder="Enter your Password" name="password" value=<?php echo $password; ?> >
      </div>
  
 
-  <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" name="update" class="btn btn-primary">Update</button>
 </form>
    </div>
 
