@@ -1,14 +1,15 @@
 <?php
     include 'connect.php';
-    $id = $_GET['updateid'];
+    
 
     if(isset($_POST['submit'])){
         $name =$_POST['name'];
         $email=$_POST['email'];
         $mobile=$_POST['mobile'];
         $password=$_POST['password'];
+        $id = $_GET['updateid'];
 
-        $sql ="UPDATE `crud` SET id=$id,name='$name',email='$email',mobile='$mobile',password='$password' WHERE id = '$id'";
+        $sql ="UPDATE `crud` SET id=$id,name='$name',email='$email',mobile=$mobile,password='$password' WHERE id = '$id'";
         $result = mysqli_query($con,$sql);
 
         if($result){
@@ -42,7 +43,7 @@
    
   <div class="mb-3">
     <label >Name</label>
-    <input type="text" class="form-control" placeholder="Enter your name" name="name" value=<?php  echo $name; ?> >
+    <input type="text" class="form-control" placeholder="Enter your name" name="name" value=<?php ?> >
     </div>
 
     <div class="form-group">
@@ -54,14 +55,14 @@
     <div class="form-group">
     <div class="mb-3">
     <label >Mobile</label>
-    <input type="text" class="form-control" placeholder="Enter your Mobile number" value=<?php echo $mobile; ?> name="mobile" >
+    <input type="text" class="form-control" placeholder="Enter your Mobile number"  name="mobile" >
     </div>
 
     <div class="form-group">
    
    <div class="mb-3">
      <label >Password</label>
-     <input type="text" class="form-control" placeholder="Enter your Password" name="password" value=<?php echo $password; ?> >
+     <input type="text" class="form-control" placeholder="Enter your Password" name="password" >
      </div>
  
 
